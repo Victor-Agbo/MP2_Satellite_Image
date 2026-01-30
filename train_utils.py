@@ -134,7 +134,6 @@ def set_weights(model, weights):
 # ============================================================
 # 6. Training and evaluation functions
 # ============================================================
-
 def train_one_epoch(model, dataloader, optimizer, criterion, device):
     model.train()
     running_loss = 0.0
@@ -154,7 +153,7 @@ def train_one_epoch(model, dataloader, optimizer, criterion, device):
 
     return running_loss / len(dataloader.dataset)
 
-def evaluate_model(model, dataloader, criterion, device, thresholds=0.5):
+def evaluate_model(model, dataloader, criterion, device, thresholds=0.2):
     model.eval()
     total_loss = 0.0
     all_preds, all_labels = [], []
@@ -202,7 +201,7 @@ def evaluate_model(model, dataloader, criterion, device, thresholds=0.5):
     pass
 
 # --- Dataset partitioning for federated clients ---
-def get_client_dataloaders(client_id, train_df, val_df, root_dir, batch_size=1):
+def get_client_dataloaders(client_id, train_df, val_df, root_dir, batch_size=4):
 
     # Apply transforms
     train_transform = T.Compose([
